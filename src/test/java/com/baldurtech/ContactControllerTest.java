@@ -32,12 +32,30 @@ public class ContactControllerTest
         contactList.add(contact);
 
         when(contactService.list()).thenReturn(contactList);
+        
         contactController.list(model);
         
         verify(contactService).list();
         verify(model).addAttribute("contactList", contactList);
         
-        assertEquals("XuShuangshuang", contactList.get(0).getName());
+        assertEquals("XuShuangshuang", contactController.list(model).get(0).getName());
+    }
+    
+    @Test
+    public void contact_show_应该由Controller中的show方法来处理()
+    {
+        Contact contact = new Contact();
+        contact.setId(1L);
+        contact.setName("ShiHang");
+        
+        when(contactService.getById(1L)).thenReturn(contact);
+        
+        contactController.show("1", model);
+ 
+        verify(contactService).getById(1L);
+        verify(model).addAttribute("contact", contact);
+        
+        assertEquals("ShiHang", contactController.show("1", model).getName());
     }
 }
 

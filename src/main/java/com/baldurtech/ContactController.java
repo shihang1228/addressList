@@ -20,10 +20,20 @@ public class ContactController
     }
     
     @RequestMapping(value = "contact/list", method = RequestMethod.GET)
-    public void list(Model model)
+    public List<Contact> list(Model model)
     {
         List<Contact> contactList = new ArrayList<Contact>();
         contactList = contactService.list();
         model.addAttribute("contactList",contactList);
+        return contactList;
+    }
+    
+    @RequestMapping(value = "contact/show", method = RequestMethod.GET)
+    public Contact show(@RequestParam(value="name", required=false) String id ,Model model)
+    {
+        Contact contact = new Contact();
+        contact = contactService.getById(Long.valueOf(id));
+        model.addAttribute("contact",contact);
+        return contact;
     }
 }

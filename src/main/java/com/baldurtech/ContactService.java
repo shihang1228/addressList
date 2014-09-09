@@ -12,7 +12,16 @@ public class ContactService
         contact.setName("xushuangshuang");
         contact.setMobile("18235408753");
         contactList.add(contact);
-        return contactList;
         
+        return contactList;
+    }
+    
+    public Contact getById(Long id) 
+    {
+        Contact contact = new Contact();
+        contact.setId(id);
+        contact.setName("ShiHang");
+         
+        return contact;
     }
 }
